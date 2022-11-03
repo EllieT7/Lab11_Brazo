@@ -12,7 +12,8 @@
     <!--Titulo y conexión WiFi-->
     <header>
       <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/logo/myn.png" alt="logo">
-      <h1 style="z-index: 100; background-color:white;">BRAZO ROBOT</h1>
+      <h1 style="z-index: 100; background-color:white;">
+         BRAZO ROBOT <img style="margin-top: -4px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/brazito.png" alt=""></h1>
       <div id="contenedor" style="display: grid;position: absolute; top: 10px;right: 0; width: 200px;">
         <img id="imgPotencia" src="" alt="">
         <p id="valorPotencia">%RSSI%</p>
@@ -34,77 +35,45 @@
     <div style="height: 25px;"></div>
 
     <!--Contenido-->
-    <div style="display: grid; grid-template-columns: 45% 45%; gap: 10%; margin: 0px 10vw; margin-bottom: 50px;">
+    <div style="display: grid; grid-template-columns: 24% 24% 24% 24%; gap: 1%; margin: auto 0;">
         <div style="justify-content: center; align-items: center;">
             <h4>Servo  1</h4>
-            <input type="range">
-            <input type="number" id="textInput2" onchange="updateTextInput(this.value);" value="0" style="width:50px">
+            <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+            <br><br>
+            <input type="range"  id="sliderInput1" onchange="updateTextInput(1, this.value);" value="0">
+            <input type="number" id="textInput1" onchange="updateTextInput(1, this.value);" value="0" style="width:50px">
             <br><br>
             <button>Enviar</button>
         </div>
         <div style="justify-content: center; align-items: center;">
             <h4>Servo 2</h4>
-            <input type="range">
-            <input type="number" id="textInput2" onchange="updateTextInput(this.value);" value="0" style="width:50px">
-
+            <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+            <br><br>
+            <input type="range" id="sliderInput2" onchange="updateTextInput(2, this.value);" value="0">
+            <input type="number" id="textInput2" onchange="updateTextInput(2, this.value);" value="0" style="width:50px">
+            <br><br>
+            <button>Enviar</button>
         </div>
-    </div>
-    <div style="display: grid; grid-template-columns: 45% 45%; gap: 10%; margin: 0px 10vw; margin-bottom: 50px;">
         <div style="justify-content: center; align-items: center;">
             <h4>Servo 3</h4>
-            <input type="range">
-            <input type="number" id="textInput2" onchange="updateTextInput(this.value);" value="0" style="width:50px">
-
+            <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+            <br><br>
+            <input type="range" id="sliderInput3" onchange="updateTextInput(3, this.value);" value="0">
+            <input type="number" id="textInput3" onchange="updateTextInput(3, this.value);"  value="0" style="width:50px">
+            <br><br>
+            <button>Enviar</button>
         </div>
         <div style="justify-content: center; align-items: center;">
             <h4>Servo 4</h4>
-            <input type="range">
-            <input type="number" id="textInput2" onchange="updateTextInput(this.value);" value="0" style="width:50px">
-
+            <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+            <br><br>
+            <input type="range" id="sliderInput4" onchange="updateTextInput(4, this.value);" value="0">
+            <input type="number" id="textInput4" onchange="updateTextInput(4, this.value);" value="0" style="width:50px">
+            <br><br>
+            <button>Enviar</button>
         </div>
     </div>
-    <script>
-        /*Funcion que permite cambiar los iconos del foco*/
-        function cambiarIconosFoco(idValor, idImagen, idSwitch, ruta){
-            if (document.getElementById(idValor).value == 0){
-                document.getElementById(idImagen).src = 'https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/intensidad_foco/intensidad1.png';
-                document.getElementById(idValor).value = 1;
-                document.getElementById(idSwitch).src ='http://esploradores.com/Practicas_html/encender_300x88.png';
-            } else {
-                document.getElementById(idImagen).src = 'https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/intensidad_foco/intensidad5.png';
-                document.getElementById(idValor).value = 0;
-                document.getElementById(idSwitch).src ='http://esploradores.com/Practicas_html/apagar_300x88.png';
-            }
-            var xhttpCambio = new XMLHttpRequest();
-            xhttpCambio.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                console.log("todo bien");
-                }
-            };
-            xhttpCambio.open("GET", "/"+ruta+document.getElementById(idValor).value, true);
-            xhttpCambio.send();
-        }
-        /*Funcion que permite cambiar los iconos del ventilador*/
-        function cambiarIconosVentilador(idValor, idImagen, idSwitch, ruta){
-            if (document.getElementById(idValor).value == 0){
-                document.getElementById(idImagen).src = 'https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/ventilador/fan-gif-27-blue-ventilator.webp';
-                document.getElementById(idValor).value = 1;
-                document.getElementById(idSwitch).src ='http://esploradores.com/Practicas_html/encender_300x88.png';
-            } else {
-                document.getElementById(idImagen).src = 'https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/ventilador/ventilador.jpg';
-                document.getElementById(idValor).value = 0;
-                document.getElementById(idSwitch).src ='http://esploradores.com/Practicas_html/apagar_300x88.png';
-            }
-            var xhttpCambio = new XMLHttpRequest();
-            xhttpCambio.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200) {
-                console.log("todo bien");
-                }
-            };
-            xhttpCambio.open("GET", "/"+ruta+document.getElementById(idValor).value, true);
-            xhttpCambio.send();
-        }
-    </script>
+    <br><br>
 
     <!--Tabla de información de la conexión-->
     <div>
@@ -190,6 +159,12 @@
     <!-- Espacios -->
     <br><br><br><br>
     <script>
+        function updateTextInput(id, val){ 
+            console.log(val);
+            document.getElementById('sliderInput'+id).value = val; 
+            document.getElementById('textInput'+id).value = val; 
+            servo2.value = val;
+        }
         /*Función para cambiar la imagen en base a la conexión WiFi*/
         function actualizarPotencia(){
             var valor = parseInt(document.getElementById("valorPotencia").innerText);

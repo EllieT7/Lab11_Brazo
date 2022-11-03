@@ -13,7 +13,7 @@
     <!--Titulo y conexión WiFi-->
     <header>
       <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/logo/myn.png" alt="logo">
-      <h1 style="z-index: 100; background-color:white;">BRAZO ROBOT</h1>
+      <h1 style="z-index: 100; background-color:white;">BRAZO ROBOT <img style="margin-top: -4px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/brazito.png" alt=""></h1>
       <div id="contenedor" style="display: grid;position: absolute; top: 10px;right: 0; width: 200px;">
         <img id="imgPotencia" src="" alt="">
         <p id="valorPotencia">%RSSI%</p>
@@ -35,34 +35,55 @@
     <div style="height: 25px;"></div>
 
     <!--Contenido-->
-    <div style="display:grid; gap: 40px;">
-      <div>
-        <center>
-          <h2>Control del Set_Point</h2>
-          <form action="/SLIDER" method="post">
-            Slider:<br>
-            <input type="range" id="pwmInput" name="pwmValue" min="0" max="1023" value="500" onchange="updateTextInput(this.value, 'pwmInput', 'textInput')" >
-            <input type="number" id="textInput" onchange="updateTextInput(this.value, 'pwmInput', 'textInput')" value="500" style="width:50px">
-            <br><button type="submit" value="Submit" onclick="setSetPoint()">Enviar</button>
-          </form>
-        </center>
+    <div style="display: grid; grid-template-columns: 40% 40%; gap: 20%; margin: auto 0;">
+      <div style="justify-content: center; align-items: center;">
+          <h4>Servo  1</h4>
+          <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+          <br><br>
+          <input type="range" id="sliderInput1" onchange="updateTextInput(1, this.value);" value="0">
+          <input type="number" id="textInput1" onchange="updateTextInput(1, this.value);" value="0" style="width:50px">
       </div>
-      <!--Gráfica-->
-      <center>
-        <div style="min-width: 310px; max-width: 800px;">
-          <div id="sensor-LM35" class="container"></div>
-        </div>
-      </center>
-      <!-- Imagenes -->
-      <div style="display: grid; grid-template-columns: 45% 45%; gap: 10%; margin: 0px 10vw; margin-bottom: 50px;">
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <img id="img-foco" src="https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/intensidad_foco/intensidad5.png" alt="foco" width="60%">
-        </div>
-        <div style="display: flex; justify-content: center; align-items: center;">
-            <img id="img-ventilador" src="https://raw.githubusercontent.com/MicaelaGordillo/images_IoT/main/ventilador/ventilador.jpg" alt="ventilador" width="60%">
-        </div>
+      <div style="justify-content: center; align-items: center;">
+          Valores
       </div>
     </div>
+    <div style="display: grid; grid-template-columns: 40% 40%; gap: 20%; margin: auto 0;">
+      <div style="justify-content: center; align-items: center;">
+        <h4>Servo 2</h4>
+        <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+        <br><br>
+        <input type="range" id="sliderInput2" onchange="updateTextInput(2, this.value);" value="0">
+        <input type="number" id="textInput2" onchange="updateTextInput(2, this.value);" value="0" style="width:50px">
+      </div>
+      <div style="justify-content: center; align-items: center;">
+          Valores
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 40% 40%; gap: 20%; margin: auto 0;">
+      <div style="justify-content: center; align-items: center;">
+        <h4>Servo 3</h4>
+        <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+        <br><br>
+        <input type="range" id="sliderInput3" onchange="updateTextInput(3, this.value);" value="0">
+        <input type="number" id="textInput3" onchange="updateTextInput(3, this.value);" value="0" style="width:50px">
+      </div>
+      <div>
+          Valores
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: 40% 40%; gap: 20%; margin: auto 0;">
+      <div style="justify-content: center; align-items: center;">
+        <h4>Servo 4</h4>
+        <img style="width: 80px;" src="https://raw.githubusercontent.com/EllieT7/Lab11_Brazo/main/servo.png" alt="">
+        <br><br>
+        <input type="range" id="sliderInput4" onchange="updateTextInput(4, this.value);" value="0">
+        <input type="number" id="textInput4" onchange="updateTextInput(4, this.value);" value="0" style="width:50px">
+      </div>
+      <div>
+          Valores
+      </div>
+    </div>
+    
     
     
     <!--Tabla de información de la conexión-->
@@ -72,7 +93,7 @@
         <div style='width: 90vw; transition: 1s;' class='ampliacion'>
         <table class="styled-table">
           <thead>
-          <tr><th style=' padding: 20px;'>ip Local</th><th style=' padding: 20px; '>Host Name</th><th style=' padding: 20px; '>Status</th><th style=' padding: 20px; '>SSID</th><th style=' padding: 20px; '>PSK</th><th style=' padding: 20px; '>BSSID</th><th style=' padding: 20px; '>RSSI</th></tr>
+          <tr><th style=' padding: 20px;'>IP Local</th><th style=' padding: 20px; '>Host Name</th><th style=' padding: 20px; '>Status</th><th style=' padding: 20px; '>SSID</th><th style=' padding: 20px; '>PSK</th><th style=' padding: 20px; '>BSSID</th><th style=' padding: 20px; '>RSSI</th></tr>
           </thead>
           <tr>
           <td style='padding: 20px;text-align: center;'class='changecolor'>
@@ -149,57 +170,12 @@
     <!-- Espacios -->
     <br><br><br><br>
     <script>
-      /*Gráfica para el sensor LM35*/
-      var sensorLM35 = new Highcharts.Chart({
-          chart:{ 
-              renderTo:'sensor-LM35' 
-          },
-          title: { 
-              text: 'Sensor LM35' 
-          },
-          series: [{
-            showInLegend: false,
-            data: []
-          }],
-          plotOptions: {
-            line: { animation: false,
-              dataLabels: { enabled: true }
-            },
-            series: { color: '#18009c' }
-          },
-          xAxis: {
-            type: 'datetime',
-            dateTimeLabelFormats: { second:'%S' }
-          },
-          yAxis: {
-            title: { text: 'Datos del Sensor LM35' }
-          },
-          credits: { enabled: false }
-      });
-      /*Función para pedir el valor del sensor LM35 cada 1 segundo*/
-      setInterval(function () {
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-              if (this.readyState == 4 && this.status == 200) {
-                  var x = (new Date()).getTime(), y = parseFloat(this.responseText);
-                  console.log(this.responseText);
-                  if(sensorLM35.series[0].data.length > 40) {
-                      sensorLM35.series[0].addPoint([x, y], true, true, true);
-                  } else {
-                      sensorLM35.series[0].addPoint([x, y], true, false, true);
-                  }
-              }
-          };
-          xhttp.open("GET", "/SensorLM35", true);
-          xhttp.send();
-      }, 1000 );
-
-      
-      function updateTextInput(val, pwmInput, textInput) {
-        document.getElementById(pwmInput).value = val; 
-        document.getElementById(textInput).value = val; 
+      function updateTextInput(id, val){ 
+            console.log(val);
+            document.getElementById('sliderInput'+id).value = val; 
+            document.getElementById('textInput'+id).value = val; 
+            servo2.value = val;
       }
-
       function setSetPoint(){
         var xhttp = new XMLHttpRequest();
           xhttp.onreadystatechange = function() {
