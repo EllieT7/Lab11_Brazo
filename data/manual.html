@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LAB 11 | Brazo Robot</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="icon.png">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="index.css">
+  </head>
+  <body>
+    <!--Titulo y conexión WiFi-->
+    <header>
+      <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/logo/myn.png" alt="logo">
+      <h1 style="z-index: 100; background-color:white;">BRAZO ROBOT</h1>
+      <div id="contenedor" style="display: grid;position: absolute; top: 10px;right: 0; width: 200px;">
+        <img id="imgPotencia" src="" alt="">
+        <p id="valorPotencia">%RSSI%</p>
+      </div>
+    </header>
+    <div style="height: 120px;"></div>
+
+    <!--Menú de navegacion-->
+    <div class="menu_superior" style="margin: 0px 60px;">
+        <nav>
+            <ul>
+              <li class="izquierda"><a href="index.html">Modo Test</a></li>
+              <li class="izquierda"><a href="manual.html">Modo Manual</a></li>
+              <li class="izquierda"><a href="automatico.html">Modo Automatico</a></li>
+            </ul>
+        </nav>
+        <hr>
+    </div>
+    <div style="height: 25px;"></div>
+
+    <!--Contenido-->
+    <div class="clock">
+      <div id="hour">00</div>
+      <span>:</span>
+      <div id="minute">00</div>
+      <span>:</span>
+      <div id="seconds">00</div>
+    </div>
+    <div id="contenedor_horario1" style="display: inline-grid; margin-right: 20px; margin-bottom: 50px;">
+        <label for="horaEncendido1">Hora de encendido</label><br>
+        <input type="number" id="horaEncendido1" name="horaEncendido1" min="0" max="23" value="18">&nbsp:
+        <input type="number" id="minutoEncendido1" name="minutoEncendido1" min="0" max="60" value="30">
+        <br><label for="horaApagado1">Hora de apagado</label><br>
+        <input type="number" id="horaApagado1" name="horaApagado1" min="0" max="23" value="7">&nbsp:
+        <input type="number" id="minutoApagado1" name="minutoApagado1" min="0" max="59" value="30">
+        <input type="number" id="flagHorario1" name="flagHorario1" min="0" max="10" value="1" style="display: none;"><br>
+        <br><button id="establecerHorario1" value="Submit" onclick="horario1()">Establecer horario ventilador</button>
+    </div>
+    <div id="contenedor_horario2" style="display: inline-grid; margin-left: 20px; margin-bottom: 60px;">
+      
+        <label for="horaEncendido2">Hora de encendido</label><br>
+        <input type="number" id="horaEncendido2" name="horaEncendido2" min="0" max="23" value="18">&nbsp:
+        <input type="number" id="minutoEncendido2" name="minutoEncendido2" min="0" max="60" value="30">
+        <br><label for="horaApagado">Hora de apagado</label><br>
+        <input type="number" id="horaApagado2" name="horaApagado2" min="0" max="23" value="7">&nbsp:
+        <input type="number" id="minutoApagado2" name="minutoApagado2" min="0" max="59" value="30">
+        <input type="number" id="flagHorario2" name="flagHorario2" min="0" max="10" value="1" style="display: none;"><br>
+        <br><button id="establecerHorario2" value="Submit" onclick="horario2()">Establecer horario foco</button>
+
+    </div>
+    
+    <!--Tabla de información de la conexión-->
+    <div>
+        <center>
+        <h1>Información de la conexión</h1> 
+        <div style='width: 90vw; transition: 1s;' class='ampliacion'>
+        <table class="styled-table">
+          <thead>
+          <tr><th style=' padding: 20px;'>IP Local</th><th style=' padding: 20px; '>Host Name</th><th style=' padding: 20px; '>Status</th><th style=' padding: 20px; '>SSID</th><th style=' padding: 20px; '>PSK</th><th style=' padding: 20px; '>BSSID</th><th style=' padding: 20px; '>RSSI</th></tr>
+          </thead>
+          <tr>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %IP%  
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %HOSTNAME%
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %STATUS%
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %SSID%
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %PSK% 
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor'>
+            %BSSID%  
+          </td>
+          <td style='padding: 20px;text-align: center;'class='changecolor' id="valorRSSI">
+            %RSSI%
+          </td> 
+          </tr>
+        </table>
+      </div>
+      </center>
+    </div>
+    <br><br>
+
+    <!--Logo pinguino-->
+    <img id="piplup" src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/logo/piplup.png" alt="">
+    
+    <!--Pie de página-->
+    <footer>
+      @Copyright MYN 2022- All Right Reserved.
+    </footer>
+    <hr>
+    
+    <!-- Fotitos de los integrantes y su información -->
+    <center><h2>Integrantes:</h2></center>     
+    <div style="display: flex;">
+        <!-- Yamil -->
+        <div class="profile-card yamil" style="margin: 0 auto;">
+            <div class="img">
+                <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/fotos/yamilPFP.jpeg">
+            </div>
+            <div class="caption">
+                <h3>Yamil Barrientos</h3>
+                <p>Estudiante</p>
+            </div>
+        </div>
+        <!-- Mica -->
+        <div class="profile-card mica" style="margin: 0 auto;">
+            <div class="img">
+                <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/fotos/micaPFP.jpeg">
+            </div>
+            <div class="caption">
+                <h3>Micaela Gordillo</h3>
+                <p>Estudiante</p>
+            </div>
+        </div>
+        <!-- Nao -->
+        <div class="profile-card" style="margin: 0 auto;">
+            <div class="img">
+                <img src="https://raw.githubusercontent.com/MicaelaGordillo/IOT_2/main/EjemploST_3/images/fotos/IMG_20210715_162333.jpg">
+            </div>
+            <div class="caption">
+                <h3>Naomi Tacachira</h3>
+                <p>Estudiante</p>
+            </div>
+        </div>
+    </div>
+    <!-- Espacios -->
+    <br><br><br><br>
+
+    <script>
+
+      var hour = document.getElementById("hour");
+      var minute = document.getElementById("minute");
+      var seconds = document.getElementById("seconds");
+
+      var clock = setInterval(function time() {
+        var date_now = new Date();
+        var hr = date_now.getHours();
+        var min = date_now.getMinutes();
+        var sec = date_now.getSeconds();
+
+        if (hr < 10) {
+          hr = "0" + hr;
+        }
+        if (min < 10) {
+          min = "0" + min;
+        }
+        if (sec < 10) {
+          sec = "0" + sec;
+        }
+
+        hour.textContent = hr;
+        minute.textContent = min;
+        seconds.textContent = sec;
+      }, 1000);
+
+      function horario1() {
+        // Recolectamos datos
+        var h1 = document.getElementById("horaEncendido1").value;
+        var m1 = document.getElementById("minutoEncendido1").value;
+        var h2 = document.getElementById("horaApagado1").value;
+        var m2 = document.getElementById("minutoApagado1").value;
+
+        //Trabajando con el tiempo actual
+        var tiempoActual = new Date();
+        var milis1 =
+          new Date(
+            tiempoActual.getFullYear(),
+            tiempoActual.getMonth(),
+            tiempoActual.getDate(),
+            h1,
+            m1,
+            0,
+            0
+          ) - tiempoActual;
+        var milis2 =
+          new Date(
+            tiempoActual.getFullYear(),
+            tiempoActual.getMonth(),
+            tiempoActual.getDate(),
+            h2,
+            m2,
+            0,
+            0
+          ) - tiempoActual;
+          console.log(milis1);
+          console.log(milis2);
+          
+        if (milis1 < 0) {
+          milis1 += 86400000; //Si la hora establecida de inicio ya pasó, se aplica desde el siguiente dia (86400000 = 24h)
+        }
+        if (milis2 < 0) {
+          milis2 = 86400000; //Si la hora establecida de apagdo ya pasó, se aplica desde el siguiente dia (86400000 = 24h)
+        }
+        if (milis1 < milis2) {
+          milis2 += 86400000;
+        }
+
+        //Establecemos los temporizadores para mandar señales al ESP32 en el momento en el que el foco deba cambiar de estado
+        setInterval(function () {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "/VentiladorEstado1", true);
+          xhttp.send();
+          console.log("temp1");
+        }, milis1);
+
+        setInterval(function () {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "/VentiladorEstado0", true);
+          xhttp.send();
+          console.log("temp2");
+        }, milis2);
+
+        console.log("Se establecieron los temporizadores");
+        alert(`Se estableció el horario correctamente :D\nEncendido: ${h1}:${m1}\nApagado: ${h2}:${m2}`);
+      }
+      function horario2() {
+        // Recolectamos datos
+        var h1 = document.getElementById("horaEncendido2").value;
+        var m1 = document.getElementById("minutoEncendido2").value;
+        var h2 = document.getElementById("horaApagado2").value;
+        var m2 = document.getElementById("minutoApagado2").value;
+
+        //Trabajando con el tiempo actual
+        var tiempoActual = new Date();
+        var milis1 =
+          new Date(
+            tiempoActual.getFullYear(),
+            tiempoActual.getMonth(),
+            tiempoActual.getDate(),
+            h1,
+            m1,
+            0,
+            0
+          ) - tiempoActual;
+        var milis2 =
+          new Date(
+            tiempoActual.getFullYear(),
+            tiempoActual.getMonth(),
+            tiempoActual.getDate(),
+            h2,
+            m2,
+            0,
+            0
+          ) - tiempoActual;
+          console.log(milis1);
+          console.log(milis2);
+          
+        if (milis1 < 0) {
+          milis1 += 86400000; //Si la hora establecida de inicio ya pasó, se aplica desde el siguiente dia (86400000 = 24h)
+        }
+        if (milis2 < 0) {
+          milis2 = 86400000; //Si la hora establecida de apagdo ya pasó, se aplica desde el siguiente dia (86400000 = 24h)
+        }
+        if (milis1 < milis2) {
+          milis2 += 86400000;
+        }
+
+        //Establecemos los temporizadores para mandar señales al ESP32 en el momento en el que el foco deba cambiar de estado
+        setInterval(function () {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "/FocoEstado1", true);
+          xhttp.send();
+          console.log("temp1");
+        }, milis1);
+
+        setInterval(function () {
+          var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", "/FocoEstado0", true);
+          xhttp.send();
+          console.log("temp2");
+        }, milis2);
+
+        console.log("Se establecieron los temporizadores - Focos");
+        alert(`Se estableció el horario correctamente :D\nEncendido: ${h1}:${m1}\nApagado: ${h2}:${m2}`);
+      }
+    </script>
+</body>
+</html>
